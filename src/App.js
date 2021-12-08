@@ -1,11 +1,23 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { getPokemon } from './services/pokemon';
 import './App.css';
 
 function App() {
+  const [pokemon, setPokemon] = useState([]);
+  const [query, setquery] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getPokemon(query);
+      console.log(data);
+      setPokemon(data.results);
+    };
+    fetchData();
+  });
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
