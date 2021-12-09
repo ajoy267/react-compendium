@@ -20,7 +20,7 @@ function App() {
     if (loading) {
       fetchData();
     }
-  });
+  }, [loading, query]);
 
   return (
     <div className="App">
