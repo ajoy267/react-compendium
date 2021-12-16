@@ -1,20 +1,22 @@
 import React from 'react';
+import { TextField, Button } from '@mui/material';
 
 export default function Control({ query, setQuery, setLoading }) {
   return (
     <div>
       <div className="control">
-        <input
+        <TextField
           type="text"
-          placeholder="Search Pokemon"
+          variant="outlined"
+          label="Search Pokemon"
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
           }}
-        ></input>
-        <button className="button" onClick={() => setLoading(true)}>
+        />
+        <Button variant="outlined" className="button" onClick={() => setLoading(true)}>
           Search
-        </button>
+        </Button>
       </div>
     </div>
   );
