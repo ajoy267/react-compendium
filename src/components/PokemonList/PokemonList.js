@@ -1,6 +1,11 @@
 import React from 'react';
+import { Button } from '@mui/material';
 
-export default function PokemonList({ pokemon }) {
+export default function PokemonList({ pokemon, currentPage, setCurrentPage, setLoading }) {
+  const nextPage = () => {
+    setCurrentPage((prevState) => ++prevState);
+    setLoading(true);
+  };
   return (
     <div>
       {pokemon.map((pokes) => (
@@ -9,6 +14,10 @@ export default function PokemonList({ pokemon }) {
           {pokes.type}
         </p>
       ))}
+      <div>Page: {currentPage}</div>
+      <Button variant="outlined" className="button" onClick={nextPage}>
+        Next Page
+      </Button>
     </div>
   );
 }

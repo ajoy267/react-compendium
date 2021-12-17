@@ -9,10 +9,11 @@ function App() {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState('asc');
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getPokemon(query, order);
+      const data = await getPokemon(query, order, currentPage);
       setPokemon(data.results);
       setTimeout(() => {
         setLoading(false);
@@ -21,7 +22,7 @@ function App() {
     if (loading) {
       fetchData();
     }
-  }, [loading, query, order]);
+  }, [loading, query, order, currentPage]);
 
   return (
     <div className="App">
@@ -34,7 +35,15 @@ function App() {
         setOrder={setOrder}
       />
       {loading && <span className="loader"></span>}
-      {!loading && <PokemonList pokemon={pokemon} />}
+      {!loading && (
+        <PokemonList
+          pokemon={pokemon}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      )}
     </div>
   );
 }
